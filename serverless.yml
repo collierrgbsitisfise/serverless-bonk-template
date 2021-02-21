@@ -7,7 +7,7 @@ package:
 
 resources:
   # DynamoDB tables
-  - ${file(resources/users-dynamo-table.yaml)}
+  - ${file(resources/example-table.yaml)}
 
 custom:
   prune:
@@ -24,35 +24,19 @@ plugins:
   - serverless-offline
   - serverless-dotenv-plugin
   - serverless-prune-plugin
+  - serverless-iam-roles-per-function
 
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: dev
-  region: eu-west-2
+  stage: ${env:ENV}
+  region: ${env:REGION}
+  lambdaHashingVersion: 20201221
   apiGateway:
     minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
+    shouldStartNameWithService: true
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
 
 functions:
-  exampleFunction:
-    handler: ./functions/example.main
-    events:
-      - http:
-          path: /example
-          method: get
-          cors: true
-    iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:DescribeTable
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource:
-        - { 'Fn::GetAtt': ['UsersTable', 'Arn'] }
-        - { 'Fn::GetAtt': ['EmailsTable', 'Arn'] }
+  ${file(src/functions/example/exmaple.yaml)}

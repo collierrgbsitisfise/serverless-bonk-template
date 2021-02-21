@@ -1,0 +1,17 @@
+Resources:
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${env:ENV}-${env:USERS_TABLE_NAME}
+      AttributeDefinitions:
+        - AttributeName: chatId
+          AttributeType: S
+        - AttributeName: userId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: chatId
+          KeyType: HASH
+        - AttributeName: userId
+          KeyType: RANGE
+      # Set the capacity to auto-scale
+      BillingMode: PAY_PER_REQUEST

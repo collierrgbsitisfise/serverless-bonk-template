@@ -23,8 +23,8 @@ const onErrorHandler = async (error: Error): Promise<APIGatewayProxyResult> => {
   };
 };
 
-export const lambdaWrapper = (
-  lambda: (event: APIGatewayEvent, context: Context, callback: Callback) => Promise<[any, number]>,
+export const apiGatewayLambdaWrapper = (
+  lambda: (event: APIGatewayEvent, context?: Context, callback?: Callback) => [any, number] | Promise<[any, number]>,
   onSucces: (
     value: any,
     statusCode: number,

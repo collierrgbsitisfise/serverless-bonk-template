@@ -1,0 +1,20 @@
+exampleFunction:
+  handler: ./src/functions/example/example.main # path relative to serverless.yaml
+  events:
+    - http:
+        path: /example
+        method: get
+        cors: true
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:DescribeTable
+      - dynamodb:Query
+      - dynamodb:Scan
+      - dynamodb:GetItem
+      - dynamodb:PutItem
+      - dynamodb:UpdateItem
+      - dynamodb:DeleteItem
+    Resource:
+      - { 'Fn::GetAtt': ['UsersTable', 'Arn'] }
+      - { 'Fn::GetAtt': ['EmailsTable', 'Arn'] }
