@@ -5,6 +5,9 @@ exampleFunction:
         path: /example
         method: get
         cors: true
+        request:
+            schema:
+              application/json: ${file(schema/request-example.json)}
   iamRoleStatements:
   - Effect: Allow
     Action:
