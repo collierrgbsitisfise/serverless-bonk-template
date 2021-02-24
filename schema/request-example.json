@@ -1,0 +1,18 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "Schema example",
+  "required": [
+    "chatId",
+    "userId"
+  ],
+  "properties": {
+    "chatId": {
+      "type": "number"
+    },
+    "userId": {
+      "type": "number"
+    }
+  }
+}
