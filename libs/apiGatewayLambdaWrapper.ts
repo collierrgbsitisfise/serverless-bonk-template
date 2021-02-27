@@ -1,20 +1,20 @@
 import { APIGatewayEvent, Context, Callback, APIGatewayProxyResult } from 'aws-lambda';
 
-type Headers = { [key: string]: string };
+export type Headers = { [key: string]: string };
 
-type LambdaFunction = (
+export type LambdaFunction = (
   event: APIGatewayEvent,
   context?: Context,
   callback?: Callback,
 ) => [any, number, Headers] | Promise<[any, number, Headers]>;
 
-type OnSuccesHandler = (
+export type OnSuccesHandler = (
   value: any,
   statusCode: number,
   headers?: Headers,
 ) => APIGatewayProxyResult | PromiseLike<APIGatewayProxyResult>;
 
-type OnErrorHandle = (error: Error) => Promise<APIGatewayProxyResult>;
+export type OnErrorHandle = (error: Error) => Promise<APIGatewayProxyResult>;
 
 const defaultHeaders = {
   'Content-Type': 'application/json',
