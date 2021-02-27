@@ -2,6 +2,20 @@ import { APIGatewayEvent, Context, Callback, APIGatewayProxyResult } from 'aws-l
 
 type Headers = { [key: string]: string };
 
+type LambdaFunction = (
+  event: APIGatewayEvent,
+  context?: Context,
+  callback?: Callback,
+) => [any, number, Headers] | Promise<[any, number, Headers]>;
+
+type OnSuccesHandler = (
+  value: any,
+  statusCode: number,
+  headers?: Headers,
+) => APIGatewayProxyResult | PromiseLike<APIGatewayProxyResult>;
+
+type OnErrorHandle = (error: Error) => Promise<APIGatewayProxyResult>;
+
 const defaultHeaders = {
   'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': '*',
@@ -30,17 +44,9 @@ const onErrorHandler = async (error: Error): Promise<APIGatewayProxyResult> => {
 };
 
 export const apiGatewayLambdaWrapper = (
-  lambda: (
-    event: APIGatewayEvent,
-    context?: Context,
-    callback?: Callback,
-  ) => [any, number, Headers] | Promise<[any, number, Headers]>,
-  onSucces: (
-    value: any,
-    statusCode: number,
-    headers?: Headers,
-  ) => APIGatewayProxyResult | PromiseLike<APIGatewayProxyResult> = onSuccesHandler,
-  onError: (error: Error) => Promise<APIGatewayProxyResult> = onErrorHandler,
+  lambda: LambdaFunction,
+  onSucces: OnSuccesHandler = onSuccesHandler,
+  onError: OnErrorHandle = onErrorHandler,
 ) => {
   return function wrapp(event: APIGatewayEvent, context: Context, callback: Callback): Promise<APIGatewayProxyResult> {
     return Promise.resolve()
