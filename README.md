@@ -1,6 +1,8 @@
-# README bonk template
+# Serverless-Bonk-Template (aws)
 
+![bonk](https://dogemuchwow.com/wp-content/themes/dogeland/app/bonk/images/cheems.png)
 
+Base template(boilerplate) based on [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) + typescript. Describe optimal structure(IMHO), prettier/lint, lib/helpers in order to start development.
 # dot env
 https://www.serverless.com/framework/docs/environment-variables/
 

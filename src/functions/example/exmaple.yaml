@@ -20,4 +20,3 @@ exampleFunction:
       - dynamodb:DeleteItem
     Resource:
       - { 'Fn::GetAtt': ['UsersTable', 'Arn'] }
-      - { 'Fn::GetAtt': ['EmailsTable', 'Arn'] }
