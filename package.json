@@ -9,7 +9,7 @@
     "deploy": "sls deploy",
     "lint": "eslint . --ext js,ts --cache --fix",
     "prettier": "prettier --config .prettierrc.js './**/*.ts' --write",
-    "typecheck": "tsc --noEmit",
+    "ts-check": "tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {},

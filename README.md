@@ -2,7 +2,89 @@
 
 ![bonk](https://dogemuchwow.com/wp-content/themes/dogeland/app/bonk/images/cheems.png)
 
-Base template(boilerplate) based on [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) + typescript. Describe optimal structure(IMHO), prettier/lint, lib/helpers in order to start development.
+
+[Serverless](https://www.serverless.com/) template(boilerplate) based on [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) + [typescript](https://www.typescriptlang.org/). Define project structure based on preudo [onion](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/) arhitecure(lambda-handler -> service -> repository). Predefine prettier/linter rules, lib/helpers functions.
+
+### Next serverless plugins are used:
+
+  - [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack)
+  - [serverless-offline](https://github.com/dherault/serverless-offline)
+  - [serverless-dotenv-plugin](https://github.com/neverendingqs/serverless-dotenv-plugin)
+  - [serverless-prune-plugin](https://github.com/claygregory/serverless-prune-plugin)
+  - [serverless-iam-roles-per-function](https://github.com/functionalone/serverless-iam-roles-per-function)
+
+### File structure
+```dotnetcli
+.
+├── resources                           # resourcersuch as VPC, DynamoDB Tables etc.
+├── scripts                             # some helpers which will be used in CI/CD, development, etc.
+├── schemas                             # schemas to validate API request on API gateway level
+├── @mocks                              # mocks which will be used in tests
+├── @types                              # types
+├── env                                 # env files
+├── lib                                 # helpers to operate with lambdas itself, should not be used inside lambda.
+    ├── apiGatewayLambdaWrapper.ts      # wrap lambdas which are invoked by api gateway
+    ├── cloudWatchLambdaWrapper.ts      # wrap lambdas which are invoked by cloud watch event
+    ├── snsLambdaWrapper.ts             # wrap lambdas which are invoked by sns message
+    ├── sqsLambdaWrapper.ts             # wrap lambdas which are invoked by sqs message
+    ├── dynamoDBStreamLambdaWrapper.ts  # wrap lambdas which are by dynamoDB stream
+├── src
+│   ├── functions                       # Lambda
+│   │   ├── example
+│   │   │   ├── example.ts              # `Example` lambda source code
+│   │   │   ├── example.yaml            # `Example` function template part 
+│   │   │
+│   │   └── index.ts                    # Import/export all lambdas
+│   │
+│   └── helpers                         # Helpers which are used inside src folder, example - helper to receive secrets from secret manager
+│   └── services                        # Services logic which will operate with external API/repostiroris/Domain Logic
+│   └── repositories                    # Layer which will operate with database
+│
+├── package.json
+├── serverless.ts                       # Serverless service file
+├── tsconfig.json                       # Typescript compiler configuration
+├── tsconfig.paths.json                 # Typescript paths
+└── webpack.config.js                   # Webpack configuration
+└── .eslintrc.js                        # ESlint config
+└── .prettierrc.js                      # Prettier config
+```
+
+### Scripts
+
+- Linter
+
+```bash
+npm run lint
+```
+
+- Prettier
+
+```bash
+npm run prettier
+```
+
+- Typescript types check
+
+```bash
+npm ts-check
+```
+
+- Setup env
+
+```bash
+ENV=<envValue> npm run setup # will create .env on root level
+```
+
+### How deploy ?
+
+- [Setup aws credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials/)
+
+- Run next commands
+```bash
+$: ENV=<envValue> npm run setup # setup env file
+$: npm run deploy # deploy
+```
+
 # dot env
 https://www.serverless.com/framework/docs/environment-variables/
 
