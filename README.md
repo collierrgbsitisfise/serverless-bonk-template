@@ -1,9 +1,11 @@
 # ⚡️⚡️⚡️ Serverless-Bonk-Template (aws)
 
 
-[![Serverless][ico-serverless]][link-serverless]
-[![License][ico-license]][link-license]
-[![NPM][ico-npm]][link-npm]
+[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[![Contributors][ico-contributors]][link-contributors]
+
 
 ![bonk](https://dogemuchwow.com/wp-content/themes/dogeland/app/bonk/images/cheems.png)
 
@@ -81,3 +83,9 @@ https://medium.com/better-programming/set-up-your-serverless-project-with-typesc
 https://github.com/targoo/serverless-typescript-boilerplate
 
 https://github.com/serverless/serverless/tree/master/lib/plugins/create/templates/aws-nodejs-typescript
+
+
+[ico-contributors]: https://img.shields.io/github/contributors/collierrgbsitisfise/serverless-bonk-template.svg
+
+[link-contributors]: https://github.com/collierrgbsitisfise/serverless-bonk-template
+
