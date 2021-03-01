@@ -1,13 +1,16 @@
 # ⚡️⚡️⚡️ Serverless-Bonk-Template (aws)
 
 
-[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributors][ico-contributors]][link-contributors]
+[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributors][ico-contributors]][link-contributors] ![master status](https://github.com/collierrgbsitisfise/serverless-bonk-template/actions/workflows/main.yaml/badge.svg?branch=master)
 
+_ _ _
 
 ![bonk](https://dogemuchwow.com/wp-content/themes/dogeland/app/bonk/images/cheems.png)
 
 
 [Serverless](https://www.serverless.com/) template(boilerplate) based on [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) + [typescript](https://www.typescriptlang.org/). Define project structure based on preudo [onion](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/) arhitecure(lambda-handler -> service -> repository). Predefine `prettier/linter` rules, `lib/helpers` functions.
+
+___
 
 ### Next serverless plugins are used:
 
@@ -17,6 +20,7 @@
   - [serverless-prune-plugin](https://github.com/claygregory/serverless-prune-plugin)
   - [serverless-iam-roles-per-function](https://github.com/functionalone/serverless-iam-roles-per-function)
 
+___
 ### File structure
 ```dotnetcli
 .
@@ -53,6 +57,8 @@
 └── .prettierrc.js                      # Prettier config
 ```
 
+___
+
 ### Scripts
 
 
@@ -63,6 +69,8 @@
 |  Typescript check  | `npm run ts-check`                                              |
 |  Setup env         | `ENV=<envValue> npm run setup # will create .env on root level` |
 
+___
+
 ### How to deploy
 
 - [Setup aws credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials/)
@@ -72,6 +80,8 @@
 $: ENV=<envValue> npm run setup # setup env file
 $: npm run deploy # deploy
 ```
+
+___
 
 ### Resources:
 
