@@ -4,7 +4,7 @@
   "description": "serverless template using typescript + webpack",
   "main": "index.js",
   "scripts": {
-    "setup": "node ./scripts/setup.js",
+    "setup": "node ./scripts/setup-env.js",
     "start:dev": "sls offline",
     "deploy": "sls deploy",
     "lint": "eslint . --ext js,ts --cache --fix",
