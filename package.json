@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "setup": "node ./scripts/setup-env.js",
+    "package": "node_modules/.bin/sls package",
     "start:dev": "sls offline",
     "deploy": "sls deploy",
     "lint": "eslint . --ext js,ts --cache --fix",
