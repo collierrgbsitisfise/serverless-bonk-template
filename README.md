@@ -5,11 +5,15 @@
 
 _ _ _
 
-![bonk](https://dogemuchwow.com/wp-content/themes/dogeland/app/bonk/images/cheems.png)
+<div style="text-align:center">
+  <img src="https://dogemuchwow.com/wp-content/themes/dogeland/app/bonk/images/cheems.png" align="center"/>
+</div>
 
 
-[Serverless](https://www.serverless.com/) template(boilerplate) based on [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) + [typescript](https://www.typescriptlang.org/). Define project structure based on preudo [onion](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/) arhitecure(lambda-handler -> service -> repository). Predefine `prettier/linter` rules, `lib/helpers` functions.
 
+[Serverless](https://www.serverless.com/) template(boilerplate) based on [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) + [typescript](https://www.typescriptlang.org/). Define project structure based on pseudo [onion](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/) arhitecure(lambda -> service -> repository). Predefine `prettier/linter` rules, `lib/helpers` functions.
+
+#### Example
 ___
 
 ### Next serverless plugins are used:
@@ -62,12 +66,12 @@ ___
 ### Scripts
 
 
-| Command            | Script                                                          |
-| :----------------: | :--------------:                                                |
-|  Lint              | `npm run lint`                                                  |
-|  Prettier          | `npm run prettier`                                              |
-|  Typescript check  | `npm run ts-check`                                              |
-|  Setup env         | `ENV=<envValue> npm run setup # will create .env on root level` |
+|     Command      |                             Script                              |
+| :--------------: | :-------------------------------------------------------------: |
+|       Lint       |                         `npm run lint`                          |
+|     Prettier     |                       `npm run prettier`                        |
+| Typescript check |                       `npm run ts-check`                        |
+|    Setup env     | `ENV=<envValue> npm run setup # will create .env on root level` |
 
 ___
 
@@ -83,6 +87,140 @@ $: npm run deploy # deploy
 
 ___
 
+### Folders purpose
+
+- #### libs
+
+On the `libs` folder are defined helpers/utils which will operate with lambda itself. The `libs` folder functions never should be used in inside handler. In boilerplate are predefined lambda wrappers for base case scenario lambda use: 
+- lambda triggered by dynamodb stream
+- lambda triggered by sns
+- lambda triggered by sqs
+- lambda triggered by cloudwatch event
+- lambda tied to ApiGateway
+
+<details>
+  <summary>Wrapper for lambda tied to ApiGateway</summary>
+  <p>
+
+
+```javascript
+import { DynamoDBStreamEvent, Context, Callback } from 'aws-lambda';
+
+export const dynamoDblambdaWrapper = (
+  lambda: (event: DynamoDBStreamEvent, context: Context, callback: Callback) => Promise<any>,
+  onSucces: (event: DynamoDBStreamEvent, result: any) => any | PromiseLike<any>,
+  onError: (event: DynamoDBStreamEvent, error: Error) => any | PromiseLike<any>,
+) => {
+  return function wrapp(event: DynamoDBStreamEvent, context?: Context, callback?: Callback): Promise<any> {
+    return Promise.resolve()
+      .then(() => lambda(event, context, callback))
+      .then((res: any) => onSucces(event, res))
+      .catch((err: Error) => onError(event, err));
+  };
+};
+
+```
+
+</p>
+</details>
+
+<details>
+  <summary>Wrapper for lambda tied to dyanamoDB stream</summary>
+  <p>
+
+
+```javascript
+import { APIGatewayEvent, Context, Callback, APIGatewayProxyResult } from 'aws-lambda';
+
+export type Headers = { [key: string]: string };
+
+export type LambdaFunction = (
+  event: APIGatewayEvent,
+  context?: Context,
+  callback?: Callback,
+) => [any, number, Headers] | Promise<[any, number, Headers]>;
+
+export type OnSuccesHandler = (
+  value: any,
+  statusCode: number,
+  headers?: Headers,
+) => APIGatewayProxyResult | PromiseLike<APIGatewayProxyResult>;
+
+export type OnErrorHandle = (error: Error) => Promise<APIGatewayProxyResult>;
+
+const defaultHeaders = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Credentials': true,
+};
+
+const onSuccesHandler = (
+  data: any,
+  statusCode: number,
+  headers?: Headers,
+): APIGatewayProxyResult | PromiseLike<APIGatewayProxyResult> => ({
+  statusCode,
+  headers: {
+    ...defaultHeaders,
+    ...headers,
+  },
+  body: JSON.stringify(data),
+});
+
+const onErrorHandler = async (error: Error): Promise<APIGatewayProxyResult> => {
+  return {
+    statusCode: 500,
+    headers: defaultHeaders,
+    body: JSON.stringify(error),
+  };
+};
+
+export const apiGatewayLambdaWrapper = (
+  lambda: LambdaFunction,
+  onSucces: OnSuccesHandler = onSuccesHandler,
+  onError: OnErrorHandle = onErrorHandler,
+) => {
+  return function wrapp(event: APIGatewayEvent, context: Context, callback: Callback): Promise<APIGatewayProxyResult> {
+    return Promise.resolve()
+      .then(() => lambda(event, context, callback))
+      .then(([res, code, headers]: [any, number, Headers]) => onSucces(res, code, headers))
+      .catch(onError);
+  };
+};
+
+
+```
+
+</p>
+</details>
+
+- #### @mocks
+
+Some raw data(example of sns message, api request, sqs message, etc) which could be used during local development or in test.
+
+- #### @types
+
+general/shared types which could be used across project.
+
+- #### env
+
+For each environment should be predefined `<ENV>.env` ffile, which will be used by `setup-script` before deploy.
+
+**Should not contain sensitive info such as secrets , db passwords, etc. Such kind of info must be retrived from secret-manager in runtime**
+
+- #### resources
+
+Define resources which will be created/updated on deploy, such as **dynamodb table**, **SqlRDSInstance**, etc.
+
+- #### schemas
+
+Define request schemas by which ApiGateway will validate request. Also could be defined response schemas. All of them could be used in test or for swagger documentation.
+
+- #### scripts
+`.js` files which usually are used in CI/CD(`setup-script`), also it could be used in development purpose, as example script which will use ngrok for setuping some webhooks.
+
+- #### src
+describes the behavior of the function and its auxiliary components such as **services**, **repository**, **helpers**
 ### Resources:
 
 https://medium.com/better-programming/set-up-your-serverless-project-with-typescript-ready-to-deploy-to-aws-6cfd7b2e5263
