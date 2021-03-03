@@ -193,32 +193,33 @@ export const apiGatewayLambdaWrapper = (
 
 </p>
 </details>
-#### @mocks 🗒️
+
+### @mocks 🗒️
 
 Some raw data(example of sns message, api request, sqs message, etc) which could be used during local development or in test.
 
-#### @types 📚
+### @types 📚
 
 general/shared types which could be used across project.
 
-#### env ⚆
+### env ⚆
 
 For each environment should be predefined `<ENV>.env` ffile, which will be used by `setup-script` before deploy.
 
 **Should not contain sensitive info such as secrets , db passwords, etc. Such kind of info must be retrived from secret-manager in runtime**
 
-#### resources 🔆
+### resources 🔆
 
 Define resources which will be created/updated on deploy, such as **dynamodb table**, **SqlRDSInstance**, etc.
 
-#### schemas ✅ 
+### schemas ✅ 
 
 Define request schemas by which ApiGateway will validate request. Also could be defined response schemas. All of them could be used in test or for swagger documentation.
 
-#### scripts 📜
+### scripts 📜
 `.js` files which usually are used in CI/CD(`setup-script`), also it could be used in development purpose, as example script which will use ngrok for setuping some webhooks.
 
-#### src 🗄️
+### src 🗄️
 describes the behavior of the function and its auxiliary components such as **services**, **repository**, **helpers**
 ### Resources:
 
