@@ -16,6 +16,8 @@
     ".serverless/**/*",
     ".webpack/**/*",
     "_warmup/**/*",
-    ".vscode/**/*"
+    ".vscode/**/*",
+    "lib/**/*.test.ts",
+    "src/**/*.test.ts",
   ]
 }
