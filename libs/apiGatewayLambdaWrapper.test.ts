@@ -3,7 +3,7 @@ import { APIGatewayEvent, Context, Callback } from 'aws-lambda';
 import { apiGatewayLambdaWrapper } from './apiGatewayLambdaWrapper';
 
 describe('apiGatewayLambdaWrapper', () => {
-  beforeEach(() => {
+  afterEach(() => {
     jest.resetAllMocks();
     jest.clearAllMocks();
   });
@@ -15,36 +15,36 @@ describe('apiGatewayLambdaWrapper', () => {
 
     const lambdaResponse = [{}, 200, {}];
     const successHandler = jest.fn();
-    const errorHandle = jest.fn();
+    const errorHandler = jest.fn();
     const lambda = jest.fn().mockReturnValueOnce(lambdaResponse);
 
-    const executable = apiGatewayLambdaWrapper(lambda, successHandler, errorHandle);
+    const executable = apiGatewayLambdaWrapper(lambda, successHandler, errorHandler);
     expect.assertions(4);
     const result = await executable(fakeEvent, fakeContext, fakeCallBack);
 
     expect(result).toMatchSnapshot();
     expect(lambda).toBeCalledWith(fakeEvent, fakeContext, fakeCallBack);
     expect(successHandler).toBeCalledWith(...lambdaResponse);
-    expect(errorHandle).not.toBeCalled();
+    expect(errorHandler).not.toBeCalled();
   });
 
-  it('should call "onErrorHandler"', async () => {
+  it('should call "onErrorHandlerr"', async () => {
     const fakeEvent = {} as APIGatewayEvent;
     const fakeContext = {} as Context;
     const fakeCallBack = jest.fn() as Callback;
     const fakeError = 'error message';
 
     const successHandler = jest.fn();
-    const errorHandle = jest.fn();
+    const errorHandler = jest.fn();
     const lambda = jest.fn().mockRejectedValueOnce('error message');
 
-    const executable = apiGatewayLambdaWrapper(lambda, successHandler, errorHandle);
+    const executable = apiGatewayLambdaWrapper(lambda, successHandler, errorHandler);
     expect.assertions(4);
     const result = await executable(fakeEvent, fakeContext, fakeCallBack);
 
     expect(result).toMatchSnapshot();
     expect(lambda).toBeCalledWith(fakeEvent, fakeContext, fakeCallBack);
     expect(successHandler).not.toBeCalled();
-    expect(errorHandle).toBeCalledWith(fakeError);
+    expect(errorHandler).toBeCalledWith(fakeError);
   });
 });

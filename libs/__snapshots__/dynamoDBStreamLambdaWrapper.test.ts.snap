@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dynamoDBStreamLambdaWrapper should call "onError" handler 1`] = `undefined`;
+
+exports[`dynamoDBStreamLambdaWrapper should call "onSucces" handler 1`] = `undefined`;

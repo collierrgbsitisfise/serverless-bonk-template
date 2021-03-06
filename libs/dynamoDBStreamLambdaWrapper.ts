@@ -1,6 +1,6 @@
 import { DynamoDBStreamEvent, Context, Callback } from 'aws-lambda';
 
-export const dynamoDblambdaWrapper = (
+export const dynamoDBStreamLambdaWrapper = (
   lambda: (event: DynamoDBStreamEvent, context: Context, callback: Callback) => Promise<any>,
   onSucces: (event: DynamoDBStreamEvent, result: any) => any | PromiseLike<any>,
   onError: (event: DynamoDBStreamEvent, error: Error) => any | PromiseLike<any>,

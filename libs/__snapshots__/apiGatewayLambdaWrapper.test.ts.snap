@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`apiGatewayLambdaWrapper should call "onErrorHandler" 1`] = `undefined`;
+exports[`apiGatewayLambdaWrapper should call "onErrorHandlerr" 1`] = `undefined`;
 
 exports[`apiGatewayLambdaWrapper should call "onSuccesHandler" 1`] = `undefined`;

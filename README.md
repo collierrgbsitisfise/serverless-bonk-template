@@ -234,3 +234,6 @@ https://github.com/serverless/serverless/tree/master/lib/plugins/create/template
 
 [link-contributors]: https://github.com/collierrgbsitisfise/serverless-bonk-template
 
+
+FR:
+ - setup Integration test.

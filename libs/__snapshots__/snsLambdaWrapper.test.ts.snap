@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snsLambdaWrapper should call "onError" handler 1`] = `undefined`;
+
+exports[`snsLambdaWrapper should call "onSucces" handler 1`] = `undefined`;
