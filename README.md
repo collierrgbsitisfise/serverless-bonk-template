@@ -39,12 +39,12 @@ ___
     ├── cloudWatchLambdaWrapper.ts      # wrap lambdas which are subscribed to cloud watch event
     ├── snsLambdaWrapper.ts             # wrap lambdas which are subscribed to sns message
     ├── sqsLambdaWrapper.ts             # wrap lambdas which are subscribed to sqs message
-    ├── dynamoDBStreamLambdaWrapper.ts  # wrap lambdas which are subscribed to dynamoDB stream
+    └── dynamoDBStreamLambdaWrapper.ts  # wrap lambdas which are subscribed to dynamoDB stream
 ├── src
 │   ├── functions                       # Lambda
 │   │   ├── example
 │   │   │   ├── example.ts              # `Example` lambda source code
-│   │   │   ├── example.yaml            # `Example` function template part 
+│   │   │   └──example.yaml            # `Example` function template part 
 │   │   │
 │   │   └── index.ts                    # Import/export all lambdas
 │   │
@@ -68,10 +68,11 @@ ___
 
 |     Command      |                             Script                              |
 | :--------------: | :-------------------------------------------------------------: |
-|       Lint       |                         `npm run lint`                          |
-|     Prettier     |                       `npm run prettier`                        |
-| Typescript check |                       `npm run ts-check`                        |
-|    Setup env     | `ENV=<envValue> npm run setup # will create .env on root level` |
+| Lint             | `npm run lint`                                                  |
+| Prettier         | `npm run prettier`                                              |
+| Typescript check | `npm run ts-check`                                              |
+| Test             | `npm run test`                                                  |
+| Setup env        | `ENV=<envValue> npm run setup # will create .env on root level` |
 
 ___
 
