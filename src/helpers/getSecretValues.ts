@@ -6,7 +6,7 @@ const client = new AWS.SecretsManager({
   region: REGION,
 });
 
-const TIME_INTERVAL = 1000 * 60 * 10; // 10 minutes
+export const TIME_INTERVAL: number = 1000 * 60 * 10; // 10 minutes
 
 const secretsMap: Map<
   string,
@@ -21,6 +21,7 @@ export const getSecretValue = (secretId: string) => async (...keys: string[]): P
 
   const isExpired = secretsMap.get(secretId) && currentTimeStamp - secretsMap.get(secretId).timestamp > TIME_INTERVAL;
 
+  console.log('isExpired : ', isExpired);
   if (isExpired) {
     secretsMap.delete(secretId);
   }
