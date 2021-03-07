@@ -21,10 +21,7 @@ We should keep lambda tiny and simple - that is why it's a presudo onion archite
 5. Global Error Handling
 6. Multiple protocols within one codebase ( GraphQL / REST )
 
-[There greate boliplate with additional links](https://github.com/Melzar/onion-architecture-boilerplate)
-
-#### Example
-___
+[There is a greate boliplate with additional links](https://github.com/Melzar/onion-architecture-boilerplate)
 
 ### Next serverless plugins are used:
 
@@ -230,7 +227,7 @@ Define request schemas by which ApiGateway will validate request. Also could be 
 
 ### src 🗄️
 
-Describes the behavior of the function and its auxiliary components such as ** services **, ** repository **, ** helpers **.
+Describes the behavior of the function and its auxiliary components such as **services**, **repository**, **helpers**.
 
 [ico-contributors]: https://img.shields.io/github/contributors/collierrgbsitisfise/serverless-bonk-template.svg
 
