@@ -1,4 +1,4 @@
-# ⚡️⚡️⚡️ Serverless-Bonk-Template (aws)
+# ⚡️⚡️⚡️ Serverless-Bonk-Boilerplate (aws cloud provider)
 
 
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributors][ico-contributors]][link-contributors] ![master status](https://github.com/collierrgbsitisfise/serverless-bonk-template/actions/workflows/main.yaml/badge.svg?branch=master)
@@ -11,7 +11,17 @@ _ _ _
 
 
 
-[Serverless](https://www.serverless.com/) template(boilerplate) based on [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) + [typescript](https://www.typescriptlang.org/). Define project structure based on pseudo [onion](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/) arhitecure(lambda -> service -> repository). Predefine `prettier/linter` rules, `lib/helpers` functions.
+[Serverless](https://www.serverless.com/) boilerplate based on [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) + [typescript](https://www.typescriptlang.org/). Define project structure based on pseudo [Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/). Predefined `prettier/linter` rules, `lib/helpers` functions.
+We should keep lambda tiny and simple - that is why it's a presudo onion architerure described here (lambda[controller] -> (service[domain layer] + helepers) -> repository[data layer]). If you want to implement more points of this approach such as:
+
+1. DB Agnostic setup, supports multiple datasource
+2. Infrastructure -> Domain Mapping -> UI Mapping
+3. Migrations, Fixtures, Seeds
+4. Multiple API versions support ( REST implementation )
+5. Global Error Handling
+6. Multiple protocols within one codebase ( GraphQL / REST )
+
+[There greate boliplate with additional links](https://github.com/Melzar/onion-architecture-boilerplate)
 
 #### Example
 ___
@@ -44,7 +54,7 @@ ___
 │   ├── functions                       # Lambda
 │   │   ├── example
 │   │   │   ├── example.ts              # `Example` lambda source code
-│   │   │   └──example.yaml            # `Example` function template part 
+│   │   │   └──example.yaml             # `Example` function template part 
 │   │   │
 │   │   └── index.ts                    # Import/export all lambdas
 │   │
@@ -93,14 +103,14 @@ ___
 #### libs ⚙️
 
 On the `libs` folder are defined helpers/utils which will operate with lambda itself. The `libs` folder functions never should be used in inside handler. In boilerplate are predefined lambda wrappers for base case scenario lambda use: 
-- lambda triggered by dynamodb stream
-- lambda triggered by sns
-- lambda triggered by sqs
-- lambda triggered by cloudwatch event
-- lambda tied to ApiGateway
+- [lambda tied to dynamodb stream](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html)
+- [lambda tied to sns](https://docs.aws.amazon.com/lambda/latest/dg/with-sns.html)
+- [lambda tied to sqs](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html)
+- [lambda tied to cloudwatch event](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudwatchevents.html)
+- [lambda tied to ApiGateway](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html)
 
 <details>
-  <summary>Wrapper for lambda tied to ApiGateway</summary>
+  <summary>Wrapper for lambda tied to dyanamoDB stream</summary>
   <p>
 
 
@@ -126,7 +136,7 @@ export const dynamoDblambdaWrapper = (
 </details>
 
 <details>
-  <summary>Wrapper for lambda tied to dyanamoDB stream</summary>
+  <summary>Wrapper for lambda tied to ApiGateway</summary>
   <p>
 
 
@@ -188,8 +198,6 @@ export const apiGatewayLambdaWrapper = (
       .catch(onError);
   };
 };
-
-
 ```
 
 </p>
@@ -197,7 +205,7 @@ export const apiGatewayLambdaWrapper = (
 
 ### @mocks 🗒️
 
-Some raw data(example of sns message, api request, sqs message, etc) which could be used during local development or in test.
+Some raw data(example of sns message, api request, sqs message, etc) which could be used during local development or for test.
 
 ### @types 📚
 
@@ -221,20 +229,9 @@ Define request schemas by which ApiGateway will validate request. Also could be 
 `.js` files which usually are used in CI/CD(`setup-script`), also it could be used in development purpose, as example script which will use ngrok for setuping some webhooks.
 
 ### src 🗄️
-describes the behavior of the function and its auxiliary components such as **services**, **repository**, **helpers**
-### Resources:
 
-https://medium.com/better-programming/set-up-your-serverless-project-with-typescript-ready-to-deploy-to-aws-6cfd7b2e5263
-
-https://github.com/targoo/serverless-typescript-boilerplate
-
-https://github.com/serverless/serverless/tree/master/lib/plugins/create/templates/aws-nodejs-typescript
-
+Describes the behavior of the function and its auxiliary components such as ** services **, ** repository **, ** helpers **.
 
 [ico-contributors]: https://img.shields.io/github/contributors/collierrgbsitisfise/serverless-bonk-template.svg
 
 [link-contributors]: https://github.com/collierrgbsitisfise/serverless-bonk-template
-
-
-FR:
- - setup Integration test.
