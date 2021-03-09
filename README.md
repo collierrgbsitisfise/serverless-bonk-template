@@ -6,7 +6,7 @@
 _ _ _
 
 <div style="text-align:center">
-  <img src="https://dogemuchwow.com/wp-content/themes/dogeland/app/bonk/images/cheems.png" align="center"/>
+  <img src="http://cdn.shopify.com/s/files/1/0160/2840/1712/products/cheems_characterai_ry-min.png?v=1606473176" align="center"/>
 </div>
 
 
