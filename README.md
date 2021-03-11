@@ -1,7 +1,9 @@
 # ⚡️⚡️⚡️ Serverless-Bonk-Boilerplate (aws cloud provider)
 
 
-[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributors][ico-contributors]][link-contributors] ![master status](https://github.com/collierrgbsitisfise/serverless-bonk-template/actions/workflows/main.yaml/badge.svg?branch=master)
+[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributors][ico-contributors]][link-contributors] ![master status](https://github.com/collierrgbsitisfise/serverless-bonk-template/actions/workflows/main.yaml/badge.svg?branch=master) ![AWS](https://img.shields.io/badge/AWS%20-%23FF9900.svg?&style=for-the-badge&logo=amazon-aws&logoColor=black) ![JEST](https://img.shields.io/badge/-jest-%23C21325?&style=for-the-badge&logo=jest&logoColor=white) ![NODEJS](https://img.shields.io/badge/node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript%20-%23007ACC.svg?&style=for-the-badge&logo=typescript&logoColor=white)
+
+<img alt="NodeJS" src=""/>
 
 _ _ _
 
@@ -25,14 +27,26 @@ Describe pseudo onion architerure(lambda[controller] -> (service[domain layer] +
 
 _ _ _
 
-<h2 id="plugins">Sections</h2>
+<h2 id="plugins">content</h2>
 
 <ul>
     <li><a href="#plugins">Plugins 🔌</a></li>
     <li><a href="#file-structure">File structure 📁</a></li>
     <li><a href="#scripts">Scripts 📜</a></li>
     <li><a href="#deploy">How to deploy 🚀</a></li>
-    <li><a href="#folders">Folders purpose 📂</a></li>
+    <li>
+      <a href="#folders">Folders purpose 📂</a>
+      <ul>
+        <li><a href="#folders-libs">libs ⚙️</a></li>
+        <li><a href="#folders-mocks">@mocks 🗒️</a></li>
+        <li><a href="#folders-types">@types 📚/a></li>
+        <li><a href="#folders-env">env ⚆</a></li>
+        <li><a href="#folders-resources">resources 🔆<</a></li>
+        <li><a href="#folders-schemas">schemas ✅</a></li>
+        <li><a href="#folders-scripts">scripts 📜</a></li>
+        <li><a href="#folders-src">src 🗄️</a></li>
+      </ul>
+    </li>
     
 </ul>
 
@@ -65,7 +79,7 @@ ___
 │   ├── functions                       # Lambda
 │   │   ├── example
 │   │   │   ├── example.ts              # `Example` lambda source code
-│   │   │   └── example.yaml             # `Example` function template part 
+│   │   │   └── example.yaml            # `Example` function template part 
 │   │   │
 │   │   └── index.ts                    # Import/export all lambdas
 │   │
