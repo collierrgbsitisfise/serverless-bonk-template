@@ -1,9 +1,7 @@
-# ⚡️⚡️⚡️ Serverless-Bonk-Boilerplate (aws cloud provider)
+# ⚡️ Serverless-Bonk-Boilerplate (aws cloud provider) ⚡️
 
 
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributors][ico-contributors]][link-contributors] ![master status](https://github.com/collierrgbsitisfise/serverless-bonk-template/actions/workflows/main.yaml/badge.svg?branch=master) ![AWS](https://img.shields.io/badge/AWS%20-%23FF9900.svg?&style=for-the-badge&logo=amazon-aws&logoColor=black) ![JEST](https://img.shields.io/badge/-jest-%23C21325?&style=for-the-badge&logo=jest&logoColor=white) ![NODEJS](https://img.shields.io/badge/node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript%20-%23007ACC.svg?&style=for-the-badge&logo=typescript&logoColor=white)
-
-<img alt="NodeJS" src=""/>
 
 _ _ _
 
@@ -13,18 +11,9 @@ _ _ _
 
 
 
-[Serverless](https://www.serverless.com/) boilerplate based on [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) + [typescript](https://www.typescriptlang.org/). Define project structure based on pseudo [Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/). Predefined `prettier/linter` rules, `lib/helpers` functions.
-Describe pseudo onion architerure(lambda[controller] -> (service[domain layer] + helepers) -> repository[data layer]). If you want to implement more points of this approach such as:
+[Serverless](https://www.serverless.com/) boilerplate based on [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) + [typescript](https://www.typescriptlang.org/). Define ready to deploy project with predefined  **scripts**, **linter-prettier rules**, **basic lib** and **helpers**. Based on pseudo [Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/): **lambda[controller]** -> **service[domain layer]** + **helpers**.
 
-1. DB Agnostic setup, supports multiple datasource
-2. Infrastructure -> Domain Mapping -> UI Mapping
-3. Migrations, Fixtures, Seeds
-4. Multiple API versions support ( REST implementation )
-5. Global Error Handling
-6. Multiple protocols within one codebase ( GraphQL / REST )
-
-[There is a greate boliplate with additional links](https://github.com/Melzar/onion-architecture-boilerplate)
-
+In order to dig deeper in onion architecture check this boilerplate: https://github.com/Melzar/onion-architecture-boilerplate
 _ _ _
 
 <h2 id="plugins">content</h2>
@@ -39,9 +28,9 @@ _ _ _
       <ul>
         <li><a href="#folders-libs">libs ⚙️</a></li>
         <li><a href="#folders-mocks">@mocks 🗒️</a></li>
-        <li><a href="#folders-types">@types 📚/a></li>
+        <li><a href="#folders-types">@types 📚</li>
         <li><a href="#folders-env">env ⚆</a></li>
-        <li><a href="#folders-resources">resources 🔆<</a></li>
+        <li><a href="#folders-resources">resources 🔆</a></li>
         <li><a href="#folders-schemas">schemas ✅</a></li>
         <li><a href="#folders-scripts">scripts 📜</a></li>
         <li><a href="#folders-src">src 🗄️</a></li>
@@ -83,16 +72,16 @@ ___
 │   │   │
 │   │   └── index.ts                    # Import/export all lambdas
 │   │
-│   └── helpers                         # Helpers which are used inside src folder, example - helper to receive secrets from secret manager
-│   └── services                        # Services logic which will operate with external API/repostiroris, will contain domain logic
+│   ├── helpers                         # Helpers which are used inside src folder, example - helper to receive secrets from secret manager
+│   ├── services                        # Services logic which will operate with external API/repostiroris, will contain domain logic
 │   └── repositories                    # Layer which will operate with database
 │
 ├── package.json
 ├── serverless.ts                       # Serverless service file
 ├── tsconfig.json                       # Typescript compiler configuration
 ├── tsconfig.paths.json                 # Typescript paths
-└── webpack.config.js                   # Webpack configuration
-└── .eslintrc.js                        # ESlint config
+├── webpack.config.js                   # Webpack configuration
+├── .eslintrc.js                        # ESlint config
 └── .prettierrc.js                      # Prettier config
 ```
 
