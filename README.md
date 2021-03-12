@@ -11,7 +11,7 @@ _ _ _
 
 
 
-[Serverless](https://www.serverless.com/) boilerplate based on [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) + [typescript](https://www.typescriptlang.org/). Define ready to deploy project with predefined  **scripts**, **linter-prettier rules**, **basic lib** and **helpers**. Based on pseudo [Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/): **lambda[controller]** -> **service[domain layer]** + **helpers**.
+[Serverless](https://www.serverless.com/) boilerplate based on [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) + [typescript](https://www.typescriptlang.org/). Define ready to deploy project with predefined  **scripts**, **linter-prettier rules**, **basic lib** and **helpers**. Based on pseudo [Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/): **lambda[controller]** -> (**services[domain layer]** + **helpers**) -> **repositories**.
 
 In order to dig deeper in onion architecture check this boilerplate: https://github.com/Melzar/onion-architecture-boilerplate
 _ _ _
@@ -25,16 +25,19 @@ _ _ _
     <li><a href="#deploy">How to deploy 🚀</a></li>
     <li>
       <a href="#folders">Folders purpose 📂</a>
-      <ul>
-        <li><a href="#folders-libs">libs ⚙️</a></li>
-        <li><a href="#folders-mocks">@mocks 🗒️</a></li>
-        <li><a href="#folders-types">@types 📚</li>
-        <li><a href="#folders-env">env ⚆</a></li>
-        <li><a href="#folders-resources">resources 🔆</a></li>
-        <li><a href="#folders-schemas">schemas ✅</a></li>
-        <li><a href="#folders-scripts">scripts 📜</a></li>
-        <li><a href="#folders-src">src 🗄️</a></li>
-      </ul>
+      <details>
+        <summary>more</summary>
+        <ul>
+          <li><a href="#folders-libs">libs ⚙️</a></li>
+          <li><a href="#folders-mocks">@mocks 🗒️</a></li>
+          <li><a href="#folders-types">@types 📚</li>
+          <li><a href="#folders-env">env ⚆</a></li>
+          <li><a href="#folders-resources">resources 🔆</a></li>
+          <li><a href="#folders-schemas">schemas ✅</a></li>
+          <li><a href="#folders-scripts">scripts 📜</a></li>
+          <li><a href="#folders-src">src 🗄️</a></li>
+        </ul>
+      </details>
     </li>
     
 </ul>
@@ -155,8 +158,6 @@ export const dynamoDblambdaWrapper = (
 
 
 ```javascript
-import { APIGatewayEvent, Context, Callback, APIGatewayProxyResult } from 'aws-lambda';
-
 export type Headers = { [key: string]: string };
 
 export type LambdaFunction = (
@@ -212,6 +213,7 @@ export const apiGatewayLambdaWrapper = (
       .catch(onError);
   };
 };
+
 ```
 
 </p>
@@ -219,12 +221,11 @@ export const apiGatewayLambdaWrapper = (
 
 <h3 id="folders-mocks">@mocks 🗒️</h3>
 
-Some raw data(example of sns message, api request, sqs message, etc) which could be used during local development or for test.
+Some raw data(example of **sns message**, **api request**, **sqs message**, etc) which could be used during local development or for test.
 
 <h3 id="folders-types">@types 📚</h3>
 
-
-general/shared types which could be used across project.
+general types which could be used across project.
 
 <h3 id="folders-env">env ⚆</h3>
 
@@ -239,16 +240,21 @@ Define resources which will be created/updated on deploy, such as **dynamodb tab
  
 <h3 id="folders-schemas">schemas ✅</h3>
 
-Define request schemas by which ApiGateway will validate request. Also could be defined response schemas. All of them could be used in test or for swagger documentation.
+Define request schemas by which ApiGateway will validate request. Also could be defined response schemas. All of them could be used in test and for [documentation](https://swagger.io/)
 
 <h3 id="folders-scripts">scripts 📜</h3>
 
-`.js` files which usually are used in CI/CD(`setup-script`), also it could be used in development purpose, as example script which will use ngrok for setuping some webhooks.
+`.js` files which usually are used in **CI/CD**. Also it could be used in development purpose. 
 
+Scripts examples example:
+ - setup .env variables
+ - setup development webhooks using ngrok
+ - adding additional `.env` variables on **CI/CD**
+ - purge cloudfront cache
+ - etc
 <h3 id="folders-src">src 🗄️</h3>
 
-
-Describes the behavior of the function and its auxiliary components such as **services**, **repository**, **helpers**.
+Internal logic of application **services**, **repository**, **helpers**.
 
 [ico-contributors]: https://img.shields.io/github/contributors/collierrgbsitisfise/serverless-bonk-template.svg
 
