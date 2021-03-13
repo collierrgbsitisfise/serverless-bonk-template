@@ -19,6 +19,7 @@ _ _ _
 <h2 id="plugins">content</h2>
 
 <ul>
+    <li><a href="#usage">Usage 👨‍💻/👩‍💻</a></li>
     <li><a href="#plugins">Plugins 🔌</a></li>
     <li><a href="#file-structure">File structure 📁</a></li>
     <li><a href="#scripts">Scripts 📜</a></li>
@@ -42,6 +43,12 @@ _ _ _
     
 </ul>
 
+<h2 id="usage">Usage 👨‍💻/👩‍💻</h2>
+
+```bash
+$: npm i -g serverless # install serverless framework
+$: sls create --template https://github.com/collierrgbsitisfise/serverless-bonk-template --path <dir name>
+```
 <h2 id="plugins">Next serverless plugins are used 🔌</h2>
 
   - [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack)
