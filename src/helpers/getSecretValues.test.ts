@@ -18,9 +18,9 @@ jest.mock('aws-sdk', () => {
   }
 })
 
-import { getSecretValue, TIME_INTERVAL } from './getSecretValues';
+import { getSecretValues, TIME_INTERVAL } from './getSecretValues';
 
-describe('getSecretValue', () => {
+describe('getSecretValues', () => {
 
   afterAll(() => {
     jest.resetAllMocks();
@@ -35,7 +35,7 @@ describe('getSecretValue', () => {
     const secretId = 'secret';
     const keys = ['login', 'password'];
 
-    const result = await getSecretValue(secretId)(...keys);
+    const result = await getSecretValues(secretId)(...keys);
     expect(getSecretValueMock).toBeCalledWith({
       SecretId: secretId,
     });
@@ -47,7 +47,7 @@ describe('getSecretValue', () => {
     const secretId = 'secret';
     const keys = ['login', 'password'];
 
-    const result = await getSecretValue(secretId)(...keys);
+    const result = await getSecretValues(secretId)(...keys);
     expect(getSecretValueMock).not.toBeCalled();
     expect(result[0]).toBe('somelogin');
     expect(result[1]).toBe('somepassword');
@@ -64,7 +64,7 @@ describe('getSecretValue', () => {
     const secretId = 'secret';
     const keys = ['login', 'password'];
 
-    const result = await getSecretValue(secretId)(...keys);
+    const result = await getSecretValues(secretId)(...keys);
     expect(getSecretValueMock).toBeCalled();
     expect(result[0]).toBe('somelogin');
     expect(result[1]).toBe('somepassword');

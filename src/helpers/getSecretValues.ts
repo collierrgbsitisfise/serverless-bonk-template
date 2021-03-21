@@ -12,16 +12,15 @@ const secretsMap: Map<
   string,
   {
     timestamp: number;
-    values: { [index: string]: string };
+    values: Record<string, string>;
   }
 > = new Map();
 
-export const getSecretValue = (secretId: string) => async (...keys: string[]): Promise<string[]> => {
+export const getSecretValues = (secretId: string) => async (...keys: string[]): Promise<string[]> => {
   const currentTimeStamp = +new Date();
 
   const isExpired = secretsMap.get(secretId) && currentTimeStamp - secretsMap.get(secretId).timestamp > TIME_INTERVAL;
 
-  console.log('isExpired : ', isExpired);
   if (isExpired) {
     secretsMap.delete(secretId);
   }
