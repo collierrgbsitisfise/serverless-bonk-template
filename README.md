@@ -262,6 +262,8 @@ Scripts examples example:
 
 Internal logic of application **services**, **repository**, **helpers**.
 
+[There is an article which describes one of the predefined helpers](https://vadim-vicolaev-v.medium.com/better-way-to-get-secrets-in-serverless-world-1aba8a71b3a1)
+
 [ico-contributors]: https://img.shields.io/github/contributors/collierrgbsitisfise/serverless-bonk-template.svg
 
 [link-contributors]: https://github.com/collierrgbsitisfise/serverless-bonk-template
